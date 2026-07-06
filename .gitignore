@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-ssr/
+.env
+.env.local
+*.log
+.DS_Store
+.claude/
+*.local
+
+# Original assessment brief - not meant for a public repo
+*.pdf

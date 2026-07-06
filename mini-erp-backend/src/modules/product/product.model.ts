@@ -1,0 +1,34 @@
+import { Document, Schema, model } from "mongoose";
+
+export interface IProduct extends Document {
+  name: string;
+  sku: string;
+  category: string;
+  purchasePrice: number;
+  sellingPrice: number;
+  stockQuantity: number;
+  imageUrl: string;
+  imagePublicId?: string;
+  createdBy: Schema.Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const productSchema = new Schema<IProduct>(
+  {
+    name: { type: String, required: true, trim: true },
+    sku: { type: String, required: true, unique: true, trim: true, uppercase: true },
+    category: { type: String, required: true, trim: true },
+    purchasePrice: { type: Number, required: true, min: 0 },
+    sellingPrice: { type: Number, required: true, min: 0 },
+    stockQuantity: { type: Number, required: true, min: 0, default: 0 },
+    imageUrl: { type: String, required: true },
+    imagePublicId: { type: String },
+    createdBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  },
+  { timestamps: true }
+);
+
+productSchema.index({ name: "text", sku: "text" });
+
+export const Product = model<IProduct>("Product", productSchema);
