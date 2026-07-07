@@ -1,12 +1,21 @@
 import { cn } from "@/lib/cn";
 
+const DELAYS = ["0s", "0.1s", "0.2s", "0.3s", "0.15s"];
+
 export function Spinner({ className }: { className?: string }) {
   return (
     <div
-      className={cn(
-        "h-6 w-6 animate-spin rounded-full border-2 border-slate-300 border-t-brand-600",
-        className
-      )}
-    />
+      role="status"
+      aria-label="Loading"
+      className={cn("flex h-6 items-end gap-[3px]", className)}
+    >
+      {DELAYS.map((delay, i) => (
+        <span
+          key={i}
+          className="w-1 flex-1 animate-barcode rounded-[1px] bg-brand-500"
+          style={{ animationDelay: delay }}
+        />
+      ))}
+    </div>
   );
 }

@@ -33,7 +33,7 @@ export function RolesPage() {
   if (rolesQuery.isLoading || permissionsQuery.isLoading) {
     return (
       <div className="flex justify-center py-10">
-        <Spinner />
+        <Spinner className="h-8" />
       </div>
     );
   }
@@ -59,8 +59,8 @@ export function RolesPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Roles &amp; Permissions</h1>
-        <p className="text-sm text-slate-500">
+        <h1 className="font-display text-2xl font-bold text-stone-900">Roles &amp; Permissions</h1>
+        <p className="text-sm text-stone-500">
           Control what each role can do — changes apply immediately, no redeploy needed.
         </p>
       </div>
@@ -74,25 +74,29 @@ export function RolesPage() {
               JSON.stringify([...role.permissions].sort());
 
           return (
-            <Card key={role._id}>
+            <Card key={role._id} className="border-t-2 border-t-brand-500">
               <CardHeader className="flex items-center justify-between">
-                <h2 className="text-base font-semibold capitalize text-slate-900">{role.name}</h2>
+                <h2 className="font-display text-base font-bold capitalize text-stone-900">
+                  {role.name}
+                </h2>
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
                 {permissions.map((permission) => (
                   <label
                     key={permission.key}
-                    className="flex items-start gap-2 text-sm text-slate-700"
+                    className="flex items-start gap-2 text-sm text-stone-700"
                   >
                     <input
                       type="checkbox"
-                      className="mt-0.5"
+                      className="mt-0.5 accent-brand-600"
                       checked={selected.includes(permission.key)}
                       onChange={() => togglePermission(role.name, role.permissions, permission.key)}
                     />
                     <span>
-                      <span className="block font-medium text-slate-900">{permission.key}</span>
-                      <span className="block text-xs text-slate-500">{permission.description}</span>
+                      <span className="block font-mono text-xs font-medium text-stone-900">
+                        {permission.key}
+                      </span>
+                      <span className="block text-xs text-stone-500">{permission.description}</span>
                     </span>
                   </label>
                 ))}

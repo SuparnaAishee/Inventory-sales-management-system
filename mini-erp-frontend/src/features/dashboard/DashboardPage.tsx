@@ -6,10 +6,12 @@ import { Spinner } from "@/components/ui/Spinner";
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <Card>
+    <Card className="border-t-2 border-t-brand-500">
       <CardContent>
-        <p className="text-sm font-medium text-slate-500">{label}</p>
-        <p className="mt-1 text-3xl font-bold text-slate-900">{value}</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-stone-500">{label}</p>
+        <p className="mt-2 font-display text-4xl font-extrabold tabular-nums text-stone-900">
+          {value}
+        </p>
       </CardContent>
     </Card>
   );
@@ -24,7 +26,7 @@ export function DashboardPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Spinner />
+        <Spinner className="h-8" />
       </div>
     );
   }
@@ -36,8 +38,8 @@ export function DashboardPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
-        <p className="text-sm text-slate-500">Overview of inventory and sales</p>
+        <h1 className="font-display text-2xl font-bold text-stone-900">Dashboard</h1>
+        <p className="text-sm text-stone-500">Overview of inventory and sales</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -48,28 +50,31 @@ export function DashboardPage() {
 
       <Card>
         <CardContent>
-          <h2 className="mb-3 text-lg font-semibold text-slate-900">
-            Low Stock Products (below 5 units)
+          <h2 className="mb-3 font-display text-lg font-bold text-stone-900">
+            Low Stock Manifest <span className="text-stone-400">(below 5 units)</span>
           </h2>
           {data.lowStockProducts.length === 0 ? (
-            <p className="text-sm text-slate-500">No low stock products.</p>
+            <p className="text-sm text-stone-500">No low stock products.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full min-w-[500px] text-left text-sm">
                 <thead>
-                  <tr className="border-b border-slate-200 text-slate-500">
-                    <th className="py-2 pr-4">Name</th>
-                    <th className="py-2 pr-4">SKU</th>
-                    <th className="py-2 pr-4">Category</th>
-                    <th className="py-2 pr-4">Stock</th>
+                  <tr className="border-b-2 border-stone-200 text-xs uppercase tracking-widest text-stone-500">
+                    <th className="py-2 pr-4 font-semibold">Name</th>
+                    <th className="py-2 pr-4 font-semibold">SKU</th>
+                    <th className="py-2 pr-4 font-semibold">Category</th>
+                    <th className="py-2 pr-4 font-semibold">Stock</th>
                   </tr>
                 </thead>
                 <tbody>
                   {data.lowStockProducts.map((product) => (
-                    <tr key={product._id} className="border-b border-slate-100">
-                      <td className="py-2 pr-4 font-medium text-slate-900">{product.name}</td>
-                      <td className="py-2 pr-4 text-slate-600">{product.sku}</td>
-                      <td className="py-2 pr-4 text-slate-600">{product.category}</td>
+                    <tr
+                      key={product._id}
+                      className="border-b border-stone-100 hover:bg-stone-50"
+                    >
+                      <td className="py-2 pr-4 font-medium text-stone-900">{product.name}</td>
+                      <td className="py-2 pr-4 font-mono text-stone-600">{product.sku}</td>
+                      <td className="py-2 pr-4 text-stone-600">{product.category}</td>
                       <td className="py-2 pr-4">
                         <Badge tone="danger">{product.stockQuantity} left</Badge>
                       </td>

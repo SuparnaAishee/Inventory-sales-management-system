@@ -100,8 +100,8 @@ export function ProductsPage() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Products</h1>
-          <p className="text-sm text-slate-500">Manage your inventory</p>
+          <h1 className="font-display text-2xl font-bold text-stone-900">Products</h1>
+          <p className="text-sm text-stone-500">Manage your inventory</p>
         </div>
         {canManage && (
           <Button
@@ -126,41 +126,41 @@ export function ProductsPage() {
         <CardContent>
           {isLoading ? (
             <div className="flex justify-center py-10">
-              <Spinner />
+              <Spinner className="h-8" />
             </div>
           ) : isError || !data ? (
             <p className="text-sm text-red-600">Failed to load products.</p>
           ) : data.items.length === 0 ? (
-            <p className="text-sm text-slate-500">No products found.</p>
+            <p className="text-sm text-stone-500">No products found.</p>
           ) : (
             <>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[700px] text-left text-sm">
                   <thead>
-                    <tr className="border-b border-slate-200 text-slate-500">
-                      <th className="py-2 pr-4">Image</th>
-                      <th className="py-2 pr-4">Name</th>
-                      <th className="py-2 pr-4">SKU</th>
-                      <th className="py-2 pr-4">Category</th>
-                      <th className="py-2 pr-4">Price</th>
-                      <th className="py-2 pr-4">Stock</th>
-                      {canManage && <th className="py-2 pr-4">Actions</th>}
+                    <tr className="border-b-2 border-stone-200 text-xs uppercase tracking-widest text-stone-500">
+                      <th className="py-2 pr-4 font-semibold">Image</th>
+                      <th className="py-2 pr-4 font-semibold">Name</th>
+                      <th className="py-2 pr-4 font-semibold">SKU</th>
+                      <th className="py-2 pr-4 font-semibold">Category</th>
+                      <th className="py-2 pr-4 font-semibold">Price</th>
+                      <th className="py-2 pr-4 font-semibold">Stock</th>
+                      {canManage && <th className="py-2 pr-4 font-semibold">Actions</th>}
                     </tr>
                   </thead>
                   <tbody>
                     {data.items.map((product) => (
-                      <tr key={product._id} className="border-b border-slate-100">
+                      <tr key={product._id} className="border-b border-stone-100 hover:bg-stone-50">
                         <td className="py-2 pr-4">
                           <img
                             src={product.imageUrl}
                             alt={product.name}
-                            className="h-10 w-10 rounded object-cover"
+                            className="h-10 w-10 rounded-md border border-stone-200 object-cover"
                           />
                         </td>
-                        <td className="py-2 pr-4 font-medium text-slate-900">{product.name}</td>
-                        <td className="py-2 pr-4 text-slate-600">{product.sku}</td>
-                        <td className="py-2 pr-4 text-slate-600">{product.category}</td>
-                        <td className="py-2 pr-4 text-slate-600">
+                        <td className="py-2 pr-4 font-medium text-stone-900">{product.name}</td>
+                        <td className="py-2 pr-4 font-mono text-stone-600">{product.sku}</td>
+                        <td className="py-2 pr-4 text-stone-600">{product.category}</td>
+                        <td className="py-2 pr-4 font-mono tabular-nums text-stone-600">
                           ${product.sellingPrice.toFixed(2)}
                         </td>
                         <td className="py-2 pr-4">
@@ -195,7 +195,7 @@ export function ProductsPage() {
                 </table>
               </div>
 
-              <div className="mt-4 flex items-center justify-between text-sm text-slate-600">
+              <div className="mt-4 flex items-center justify-between text-sm text-stone-600">
                 <p>
                   Page {data.page} of {data.totalPages} ({data.total} total)
                 </p>

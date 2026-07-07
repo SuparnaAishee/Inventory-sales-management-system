@@ -1,7 +1,7 @@
 import { ApiError } from "../../utils/ApiError";
 import { queryCollection } from "../../utils/queryBuilder";
 import { Product } from "./product.model";
-import { uploadBufferToCloudinary } from "../../config/cloudinary";
+import { uploadProductImage } from "../../utils/imageStorage";
 
 export async function listProducts(rawQuery: Record<string, unknown>) {
   return queryCollection(Product, rawQuery, {
@@ -43,7 +43,7 @@ export async function createProduct(
     throw ApiError.conflict("A product with this SKU already exists");
   }
 
-  const uploaded = await uploadBufferToCloudinary(imageFile.buffer, "mini-erp/products");
+  const uploaded = await uploadProductImage(imageFile.buffer, imageFile.originalname);
 
   const product = await Product.create({
     ...input,
@@ -72,7 +72,7 @@ export async function updateProduct(
   Object.assign(product, input);
 
   if (imageFile) {
-    const uploaded = await uploadBufferToCloudinary(imageFile.buffer, "mini-erp/products");
+    const uploaded = await uploadProductImage(imageFile.buffer, imageFile.originalname);
     product.imageUrl = uploaded.url;
     product.imagePublicId = uploaded.publicId;
   }

@@ -1,11 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-500: #3b82f6;
-  --color-brand-600: #2563eb;
-  --color-brand-700: #1d4ed8;
+  /* Amber ledger-tag accent — replaces the default blue "brand" palette */
+  --color-brand-50: #fef6e7;
+  --color-brand-100: #fce8c0;
+  --color-brand-200: #f8d28a;
+  --color-brand-300: #f0b65a;
+  --color-brand-400: #e6a03a;
+  --color-brand-500: #e08a1e;
+  --color-brand-600: #c9740f;
+  --color-brand-700: #a65c0a;
+  --color-brand-800: #7c440a;
+  --color-brand-900: #522d07;
+
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 :root {
@@ -15,6 +25,23 @@
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #f7f4ec;
+  color: #1c1917;
+}
+
+@keyframes barcode-scan {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.animate-barcode {
+  animation: barcode-scan 0.9s ease-in-out infinite;
+  transform-origin: bottom;
 }

@@ -76,6 +76,7 @@ export function ProductFormDialog({
           <Input
             label="Purchase Price"
             type="number"
+            numeric
             min={0}
             step="0.01"
             value={purchasePrice}
@@ -85,6 +86,7 @@ export function ProductFormDialog({
           <Input
             label="Selling Price"
             type="number"
+            numeric
             min={0}
             step="0.01"
             value={sellingPrice}
@@ -95,23 +97,24 @@ export function ProductFormDialog({
         <Input
           label="Stock Quantity"
           type="number"
+          numeric
           min={0}
           value={stockQuantity}
           onChange={(e) => setStockQuantity(e.target.value)}
           required
         />
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-slate-700">
+          <label className="text-sm font-medium text-stone-700">
             Product Image {!isEdit && <span className="text-red-500">*</span>}
           </label>
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setImage(e.target.files?.[0] ?? null)}
-            className="text-sm"
+            className="text-sm text-stone-600 file:mr-3 file:rounded-md file:border-0 file:bg-stone-100 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-stone-700 hover:file:bg-stone-200"
           />
           {isEdit && (
-            <p className="text-xs text-slate-500">Leave empty to keep the current image.</p>
+            <p className="text-xs text-stone-500">Leave empty to keep the current image.</p>
           )}
         </div>
         {error && <p className="text-sm text-red-600">{error}</p>}

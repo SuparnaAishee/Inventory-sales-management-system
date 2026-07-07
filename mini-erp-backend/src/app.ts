@@ -1,4 +1,5 @@
 import cors from "cors";
+import path from "path";
 import express, { Application } from "express";
 import authRoutes from "./modules/auth/auth.routes";
 import productRoutes from "./modules/product/product.routes";
@@ -18,6 +19,7 @@ export function createApp(): Application {
   );
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
   app.get("/health", (_req, res) => {
     res.status(200).json({ success: true, message: "OK" });

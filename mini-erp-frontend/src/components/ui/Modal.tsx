@@ -20,11 +20,11 @@ export function Modal({ open, onClose, title, children, className }: ModalProps)
           className
         )}
       >
-        <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
-          <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+        <div className="flex items-center justify-between border-b border-stone-100 px-5 py-4">
+          <h2 className="font-display text-lg font-bold text-stone-900">{title}</h2>
           <button
             onClick={onClose}
-            className="rounded p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+            className="rounded p-1 text-stone-400 hover:bg-stone-100 hover:text-stone-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
             aria-label="Close"
           >
             &times;

@@ -37,8 +37,8 @@ export function globalErrorHandler(
     message = err.message || message;
   }
 
-  if (process.env.NODE_ENV !== "production" && err instanceof Error) {
-    console.error(err.stack);
+  if (process.env.NODE_ENV !== "production") {
+    console.error(err instanceof Error ? err.stack : err);
   }
 
   res.status(statusCode).json({
