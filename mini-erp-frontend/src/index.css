@@ -2,22 +2,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* Indigo/violet accent — the app's primary brand color */
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-300: #a5b4fc;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
+  /* Amber/orange accent — the app's primary brand color */
+  --color-brand-50: #fef6e7;
+  --color-brand-100: #fce8c0;
+  --color-brand-200: #f8d28a;
+  --color-brand-300: #f0b65a;
+  --color-brand-400: #e6a03a;
+  --color-brand-500: #e08a1e;
+  --color-brand-600: #c9740f;
+  --color-brand-700: #a65c0a;
+  --color-brand-800: #7c440a;
+  --color-brand-900: #522d07;
 
-  /* Violet partner used in gradients alongside brand */
-  --color-accent-400: #c084fc;
-  --color-accent-500: #a855f7;
-  --color-accent-600: #9333ea;
+  /* Rose partner used in gradients alongside brand — orange-to-red "sunset" pairing */
+  --color-accent-400: #fb7185;
+  --color-accent-500: #f43f5e;
+  --color-accent-600: #e11d48;
 
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -30,12 +30,12 @@
 body {
   margin: 0;
   font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background-color: #f5f5fd;
-  color: #1e1b2e;
+  background-color: #fdf9f3;
+  color: #241c14;
 }
 
 .bg-app-gradient {
-  background: radial-gradient(circle at 10% 0%, #eef2ff 0%, #f5f5fd 45%, #fdf4ff 100%);
+  background: radial-gradient(circle at 10% 0%, #fff7ed 0%, #fdf9f3 45%, #fff1f2 100%);
 }
 
 .bg-brand-gradient {
