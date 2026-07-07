@@ -104,20 +104,20 @@ export function ProductFormDialog({
           required
         />
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-stone-700">
+          <label className="text-sm font-medium text-slate-700">
             Product Image {!isEdit && <span className="text-red-500">*</span>}
           </label>
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setImage(e.target.files?.[0] ?? null)}
-            className="text-sm text-stone-600 file:mr-3 file:rounded-md file:border-0 file:bg-stone-100 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-stone-700 hover:file:bg-stone-200"
+            className="text-sm text-slate-500 file:mr-3 file:rounded-xl file:border-0 file:bg-slate-50 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-slate-700 hover:file:bg-slate-100"
           />
           {isEdit && (
-            <p className="text-xs text-stone-500">Leave empty to keep the current image.</p>
+            <p className="text-xs text-slate-400">Leave empty to keep the current image.</p>
           )}
         </div>
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-rose-600">{error}</p>}
         <div className="flex justify-end gap-2 pt-2">
           <Button type="button" variant="secondary" onClick={onClose}>
             Cancel

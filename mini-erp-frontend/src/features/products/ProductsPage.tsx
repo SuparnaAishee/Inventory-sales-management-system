@@ -100,8 +100,8 @@ export function ProductsPage() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-display text-2xl font-bold text-stone-900">Products</h1>
-          <p className="text-sm text-stone-500">Manage your inventory</p>
+          <h1 className="font-display text-2xl font-bold text-slate-900">Products</h1>
+          <p className="text-sm text-slate-400">Manage your inventory</p>
         </div>
         {canManage && (
           <Button
@@ -129,15 +129,15 @@ export function ProductsPage() {
               <Spinner className="h-8" />
             </div>
           ) : isError || !data ? (
-            <p className="text-sm text-red-600">Failed to load products.</p>
+            <p className="text-sm text-rose-600">Failed to load products.</p>
           ) : data.items.length === 0 ? (
-            <p className="text-sm text-stone-500">No products found.</p>
+            <p className="text-sm text-slate-400">No products found.</p>
           ) : (
             <>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[700px] text-left text-sm">
                   <thead>
-                    <tr className="border-b-2 border-stone-200 text-xs uppercase tracking-widest text-stone-500">
+                    <tr className="border-b border-slate-100 text-xs uppercase tracking-widest text-slate-400">
                       <th className="py-2 pr-4 font-semibold">Image</th>
                       <th className="py-2 pr-4 font-semibold">Name</th>
                       <th className="py-2 pr-4 font-semibold">SKU</th>
@@ -149,18 +149,18 @@ export function ProductsPage() {
                   </thead>
                   <tbody>
                     {data.items.map((product) => (
-                      <tr key={product._id} className="border-b border-stone-100 hover:bg-stone-50">
+                      <tr key={product._id} className="border-b border-slate-50 hover:bg-slate-50">
                         <td className="py-2 pr-4">
                           <img
                             src={product.imageUrl}
                             alt={product.name}
-                            className="h-10 w-10 rounded-md border border-stone-200 object-cover"
+                            className="h-10 w-10 rounded-xl border border-slate-100 object-cover"
                           />
                         </td>
-                        <td className="py-2 pr-4 font-medium text-stone-900">{product.name}</td>
-                        <td className="py-2 pr-4 font-mono text-stone-600">{product.sku}</td>
-                        <td className="py-2 pr-4 text-stone-600">{product.category}</td>
-                        <td className="py-2 pr-4 font-mono tabular-nums text-stone-600">
+                        <td className="py-2 pr-4 font-medium text-slate-900">{product.name}</td>
+                        <td className="py-2 pr-4 font-mono text-slate-500">{product.sku}</td>
+                        <td className="py-2 pr-4 text-slate-500">{product.category}</td>
+                        <td className="py-2 pr-4 font-mono tabular-nums text-slate-500">
                           ${product.sellingPrice.toFixed(2)}
                         </td>
                         <td className="py-2 pr-4">
@@ -195,7 +195,7 @@ export function ProductsPage() {
                 </table>
               </div>
 
-              <div className="mt-4 flex items-center justify-between text-sm text-stone-600">
+              <div className="mt-4 flex items-center justify-between text-sm text-slate-500">
                 <p>
                   Page {data.page} of {data.totalPages} ({data.total} total)
                 </p>

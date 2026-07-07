@@ -75,14 +75,14 @@ export function CreateSalePage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-stone-900">Create Sale</h1>
-        <p className="text-sm text-stone-500">Select products and quantities to record a sale</p>
+        <h1 className="font-display text-2xl font-bold text-slate-900">Create Sale</h1>
+        <p className="text-sm text-slate-400">Select products and quantities to record a sale</p>
       </div>
 
       <Card>
         <CardContent className="flex flex-col gap-4">
           {isLoading ? (
-            <p className="text-sm text-stone-500">Loading products...</p>
+            <p className="text-sm text-slate-400">Loading products...</p>
           ) : (
             <>
               {lines.map((line, index) => {
@@ -91,12 +91,12 @@ export function CreateSalePage() {
                 return (
                   <div
                     key={index}
-                    className="flex items-end gap-3 rounded-md border border-stone-100 bg-stone-50 p-3"
+                    className="flex items-end gap-3 rounded-xl border border-slate-50 bg-slate-50 p-3"
                   >
                     <div className="flex flex-1 flex-col gap-1">
-                      <label className="text-sm font-medium text-stone-700">Product</label>
+                      <label className="text-sm font-medium text-slate-700">Product</label>
                       <select
-                        className="rounded-md border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900"
+                        className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900"
                         value={line.productId}
                         onChange={(e) => updateLine(index, { productId: e.target.value })}
                       >
@@ -110,7 +110,7 @@ export function CreateSalePage() {
                       </select>
                     </div>
                     <div className="flex w-28 flex-col gap-1">
-                      <label className="text-sm font-medium text-stone-700">Quantity</label>
+                      <label className="text-sm font-medium text-slate-700">Quantity</label>
                       <input
                         type="number"
                         min={1}
@@ -119,16 +119,16 @@ export function CreateSalePage() {
                         onChange={(e) =>
                           updateLine(index, { quantity: Math.max(Number(e.target.value), 1) })
                         }
-                        className="rounded-md border border-stone-300 bg-white px-3 py-2 font-mono text-sm tabular-nums text-stone-900"
+                        className="rounded-xl border border-slate-200 bg-white px-3 py-2 font-mono text-sm tabular-nums text-slate-900"
                       />
                     </div>
-                    <div className="w-24 text-right font-mono text-sm font-medium tabular-nums text-stone-900">
+                    <div className="w-24 text-right font-mono text-sm font-medium tabular-nums text-slate-900">
                       ${subtotal.toFixed(2)}
                     </div>
                     <Button
                       type="button"
                       variant="ghost"
-                      className="px-2 py-2 text-red-600"
+                      className="px-2 py-2 text-rose-600"
                       onClick={() => removeLine(index)}
                       disabled={lines.length === 1}
                     >
@@ -142,8 +142,8 @@ export function CreateSalePage() {
                 + Add Product
               </Button>
 
-              <div className="flex items-center justify-between border-t-2 border-stone-200 pt-4">
-                <p className="font-display text-lg font-bold text-stone-900">
+              <div className="flex items-center justify-between border-t-2 border-slate-100 pt-4">
+                <p className="font-display text-lg font-bold text-slate-900">
                   Grand Total:{" "}
                   <span className="font-mono tabular-nums text-brand-700">
                     ${grandTotal.toFixed(2)}
