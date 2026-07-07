@@ -2,7 +2,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useAppDispatch, useAuth } from "@/hooks/useAuth";
 import { logout } from "@/store/authSlice";
 import { cn } from "@/lib/cn";
-import { Barcode } from "@/components/ui/Barcode";
+import { Logo } from "@/components/ui/Logo";
+import { useStockAlerts } from "@/hooks/useStockAlerts";
 
 const navItems = [
   { to: "/dashboard", label: "Dashboard" },
@@ -14,17 +15,18 @@ export function AppLayout() {
   const { user } = useAuth();
   const dispatch = useAppDispatch();
   const canManageRoles = user?.permissions?.includes("roles:manage") ?? false;
+  useStockAlerts();
 
   return (
-    <div className="flex min-h-screen bg-[#f7f4ec]">
-      <aside className="flex w-60 flex-col bg-stone-900 text-stone-300">
-        <div className="flex items-center gap-3 px-5 py-5">
-          <Barcode className="h-6 text-brand-500" barClassName="rounded-[1px]" />
+    <div className="flex min-h-screen bg-app-gradient">
+      <aside className="flex w-64 flex-col bg-white/70 backdrop-blur-xl border-r border-slate-100">
+        <div className="flex items-center gap-3 px-5 py-6">
+          <Logo className="h-9 w-9 text-base" />
           <div>
-            <h1 className="font-display text-base font-extrabold tracking-wide text-white">
-              MINI ERP
+            <h1 className="font-display text-base font-extrabold tracking-tight text-slate-900">
+              Mini ERP
             </h1>
-            <p className="text-[11px] uppercase tracking-widest text-stone-500">
+            <p className="text-[11px] font-medium uppercase tracking-widest text-slate-400">
               Inventory &amp; Sales
             </p>
           </div>
@@ -36,8 +38,8 @@ export function AppLayout() {
               to={item.to}
               className={({ isActive }) =>
                 cn(
-                  "rounded-md border-l-4 border-transparent px-3 py-2 text-sm font-medium text-stone-400 transition-colors hover:bg-stone-800 hover:text-white",
-                  isActive && "border-brand-500 bg-stone-800 text-white"
+                  "rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-500 transition-all hover:bg-slate-100 hover:text-slate-900",
+                  isActive && "bg-brand-gradient text-white shadow-md shadow-brand-600/25 hover:text-white"
                 )
               }
             >
@@ -49,8 +51,8 @@ export function AppLayout() {
               to="/roles"
               className={({ isActive }) =>
                 cn(
-                  "rounded-md border-l-4 border-transparent px-3 py-2 text-sm font-medium text-stone-400 transition-colors hover:bg-stone-800 hover:text-white",
-                  isActive && "border-brand-500 bg-stone-800 text-white"
+                  "rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-500 transition-all hover:bg-slate-100 hover:text-slate-900",
+                  isActive && "bg-brand-gradient text-white shadow-md shadow-brand-600/25 hover:text-white"
                 )
               }
             >
@@ -58,14 +60,14 @@ export function AppLayout() {
             </NavLink>
           )}
         </nav>
-        <div className="border-t border-stone-800 p-4">
-          <p className="text-sm font-medium text-white">{user?.name}</p>
-          <p className="font-mono text-[11px] uppercase tracking-widest text-brand-500">
+        <div className="border-t border-slate-100 p-4">
+          <p className="text-sm font-semibold text-slate-900">{user?.name}</p>
+          <p className="font-mono text-[11px] uppercase tracking-widest text-brand-600">
             {user?.role}
           </p>
           <button
             onClick={() => dispatch(logout())}
-            className="mt-3 text-sm font-medium text-stone-400 hover:text-red-400 hover:underline"
+            className="mt-3 text-sm font-semibold text-slate-400 hover:text-rose-500"
           >
             Log out
           </button>

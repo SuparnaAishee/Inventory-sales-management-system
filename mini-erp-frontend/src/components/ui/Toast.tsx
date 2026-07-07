@@ -2,22 +2,30 @@ import { createContext, useCallback, useContext, useState } from "react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
+type ToastTone = "success" | "error" | "warning";
+
 interface ToastItem {
   id: number;
   message: string;
-  tone: "success" | "error";
+  tone: ToastTone;
 }
 
 interface ToastContextValue {
-  showToast: (message: string, tone?: "success" | "error") => void;
+  showToast: (message: string, tone?: ToastTone) => void;
 }
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
+const toneClasses: Record<ToastTone, string> = {
+  success: "bg-brand-gradient text-white",
+  error: "bg-rose-600 text-white",
+  warning: "bg-amber-500 text-white",
+};
+
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
-  const showToast = useCallback((message: string, tone: "success" | "error" = "success") => {
+  const showToast = useCallback((message: string, tone: ToastTone = "success") => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, tone }]);
     setTimeout(() => {
@@ -33,10 +41,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           <div
             key={toast.id}
             className={cn(
-              "rounded-md border-l-4 px-4 py-3 text-sm font-medium shadow-lg",
-              toast.tone === "success"
-                ? "border-brand-500 bg-stone-900 text-white"
-                : "border-red-300 bg-red-700 text-white"
+              "rounded-xl px-4 py-3 text-sm font-medium shadow-lg shadow-slate-900/10",
+              toneClasses[toast.tone]
             )}
           >
             {toast.message}

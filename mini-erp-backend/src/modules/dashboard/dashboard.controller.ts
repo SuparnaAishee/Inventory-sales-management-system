@@ -3,8 +3,7 @@ import { asyncHandler } from "../../utils/asyncHandler";
 import { sendSuccess } from "../../utils/ApiResponse";
 import { Product } from "../product/product.model";
 import { Sale } from "../sale/sale.model";
-
-const LOW_STOCK_THRESHOLD = 5;
+import { LOW_STOCK_THRESHOLD } from "../../utils/constants";
 
 export const getStats = asyncHandler(async (_req: Request, res: Response) => {
   const [totalProducts, totalSales, lowStockProducts] = await Promise.all([

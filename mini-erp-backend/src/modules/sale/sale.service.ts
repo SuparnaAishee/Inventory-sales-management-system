@@ -1,7 +1,9 @@
 import { ApiError } from "../../utils/ApiError";
 import { queryCollection } from "../../utils/queryBuilder";
+import { LOW_STOCK_THRESHOLD } from "../../utils/constants";
 import { Product } from "../product/product.model";
 import { Sale } from "./sale.model";
+import { emitStockLow } from "../../realtime/socket";
 
 interface SaleItemInput {
   productId: string;
@@ -40,14 +42,28 @@ export async function createSale(items: SaleItemInput[], userId: string) {
 
   const grandTotal = saleItems.reduce((sum, item) => sum + item.subtotal, 0);
 
-  await Promise.all(
+  const updatedProducts = await Promise.all(
     items.map((item) =>
-      Product.updateOne(
-        { _id: item.productId },
-        { $inc: { stockQuantity: -item.quantity } }
+      Product.findByIdAndUpdate(
+        item.productId,
+        { $inc: { stockQuantity: -item.quantity } },
+        { new: true }
       )
     )
   );
+
+  // Bonus realtime feature: notify connected clients the moment a sale
+  // pushes a product below the low-stock threshold.
+  for (const product of updatedProducts) {
+    if (product && product.stockQuantity < LOW_STOCK_THRESHOLD) {
+      emitStockLow({
+        id: product.id,
+        name: product.name,
+        sku: product.sku,
+        stockQuantity: product.stockQuantity,
+      });
+    }
+  }
 
   const sale = await Sale.create({
     items: saleItems,
