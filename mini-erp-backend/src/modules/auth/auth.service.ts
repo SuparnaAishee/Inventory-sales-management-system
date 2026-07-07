@@ -2,6 +2,7 @@ import jwt, { SignOptions } from "jsonwebtoken";
 import { ApiError } from "../../utils/ApiError";
 import { User } from "../user/user.model";
 import { UserRole } from "../user/user.types";
+import { getPermissionsForRole } from "../rbac/role.service";
 
 export async function loginUser(email: string, password: string) {
   const user = await User.findOne({ email }).select("+password");
@@ -15,6 +16,7 @@ export async function loginUser(email: string, password: string) {
   }
 
   const token = signToken(user.id, user.role);
+  const permissions = await getPermissionsForRole(user.role);
 
   return {
     token,
@@ -23,6 +25,7 @@ export async function loginUser(email: string, password: string) {
       name: user.name,
       email: user.email,
       role: user.role,
+      permissions,
     },
   };
 }

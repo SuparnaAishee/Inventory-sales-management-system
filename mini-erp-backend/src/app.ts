@@ -4,6 +4,7 @@ import authRoutes from "./modules/auth/auth.routes";
 import productRoutes from "./modules/product/product.routes";
 import saleRoutes from "./modules/sale/sale.routes";
 import dashboardRoutes from "./modules/dashboard/dashboard.routes";
+import roleRoutes from "./modules/rbac/role.routes";
 import { globalErrorHandler, notFoundHandler } from "./middleware/errorHandler";
 
 export function createApp(): Application {
@@ -27,6 +28,7 @@ export function createApp(): Application {
   app.use(`${API_PREFIX}/products`, productRoutes);
   app.use(`${API_PREFIX}/sales`, saleRoutes);
   app.use(`${API_PREFIX}/dashboard`, dashboardRoutes);
+  app.use(`${API_PREFIX}/roles`, roleRoutes);
 
   app.use(notFoundHandler);
   app.use(globalErrorHandler);

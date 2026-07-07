@@ -1,15 +1,28 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiError } from "../utils/ApiError";
-import { UserRole } from "../modules/user/user.types";
+import { getPermissionsForRole } from "../modules/rbac/role.service";
 
-export function authorize(...allowedRoles: UserRole[]) {
-  return (req: Request, _res: Response, next: NextFunction) => {
-    if (!req.user) {
-      return next(ApiError.unauthorized());
+/**
+ * Authorizes by permission key, not role name. The role -> permissions
+ * mapping lives in Mongo (see modules/rbac) so admins can change what a
+ * role is allowed to do without a code change/redeploy.
+ */
+export function authorize(...requiredPermissions: string[]) {
+  return async (req: Request, _res: Response, next: NextFunction) => {
+    try {
+      if (!req.user) {
+        return next(ApiError.unauthorized());
+      }
+      const grantedPermissions = await getPermissionsForRole(req.user.role);
+      const hasPermission = requiredPermissions.some((permission) =>
+        grantedPermissions.includes(permission)
+      );
+      if (!hasPermission) {
+        return next(ApiError.forbidden("You do not have permission to perform this action"));
+      }
+      next();
+    } catch (err) {
+      next(err);
     }
-    if (!allowedRoles.includes(req.user.role)) {
-      return next(ApiError.forbidden("You do not have permission to perform this action"));
-    }
-    next();
   };
 }

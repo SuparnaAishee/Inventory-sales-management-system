@@ -23,7 +23,7 @@ const PAGE_SIZE = 10;
 
 export function ProductsPage() {
   const { user } = useAuth();
-  const canManage = user?.role === "admin" || user?.role === "manager";
+  const canManage = user?.permissions?.includes("products:manage") ?? false;
   const { showToast } = useToast();
   const queryClient = useQueryClient();
 

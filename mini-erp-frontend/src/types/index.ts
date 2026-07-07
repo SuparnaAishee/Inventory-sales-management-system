@@ -5,6 +5,19 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
+  permissions: string[];
+}
+
+export interface Permission {
+  _id: string;
+  key: string;
+  description: string;
+}
+
+export interface Role {
+  _id: string;
+  name: string;
+  permissions: string[];
 }
 
 export interface Product {

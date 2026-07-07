@@ -5,6 +5,7 @@ import { createSaleValidation } from "./sale.validation";
 import { validate } from "../../middleware/validate";
 import { authenticate } from "../../middleware/authenticate";
 import { authorize } from "../../middleware/authorize";
+import { PERMISSIONS } from "../rbac/permission.constants";
 
 const router = Router();
 
@@ -12,17 +13,17 @@ router.use(authenticate);
 
 router.post(
   "/",
-  authorize("admin", "manager", "employee"),
+  authorize(PERMISSIONS.SALES_CREATE),
   createSaleValidation,
   validate,
   saleController.createSale
 );
 
-router.get("/", authorize("admin", "manager"), saleController.getSales);
+router.get("/", authorize(PERMISSIONS.SALES_VIEW), saleController.getSales);
 
 router.get(
   "/:id",
-  authorize("admin", "manager"),
+  authorize(PERMISSIONS.SALES_VIEW),
   param("id").isMongoId().withMessage("Invalid sale id"),
   validate,
   saleController.getSale

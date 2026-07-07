@@ -9,17 +9,24 @@ import { validate } from "../../middleware/validate";
 import { authenticate } from "../../middleware/authenticate";
 import { authorize } from "../../middleware/authorize";
 import { upload } from "../../middleware/upload";
+import { PERMISSIONS } from "../rbac/permission.constants";
 
 const router = Router();
 
 router.use(authenticate);
 
-router.get("/", productController.getProducts);
-router.get("/:id", productIdValidation, validate, productController.getProduct);
+router.get("/", authorize(PERMISSIONS.PRODUCTS_VIEW), productController.getProducts);
+router.get(
+  "/:id",
+  authorize(PERMISSIONS.PRODUCTS_VIEW),
+  productIdValidation,
+  validate,
+  productController.getProduct
+);
 
 router.post(
   "/",
-  authorize("admin", "manager"),
+  authorize(PERMISSIONS.PRODUCTS_MANAGE),
   upload.single("image"),
   createProductValidation,
   validate,
@@ -28,7 +35,7 @@ router.post(
 
 router.put(
   "/:id",
-  authorize("admin", "manager"),
+  authorize(PERMISSIONS.PRODUCTS_MANAGE),
   upload.single("image"),
   updateProductValidation,
   validate,
@@ -37,7 +44,7 @@ router.put(
 
 router.delete(
   "/:id",
-  authorize("admin", "manager"),
+  authorize(PERMISSIONS.PRODUCTS_MANAGE),
   productIdValidation,
   validate,
   productController.deleteProduct

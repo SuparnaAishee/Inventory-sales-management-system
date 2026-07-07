@@ -12,6 +12,7 @@ const navItems = [
 export function AppLayout() {
   const { user } = useAuth();
   const dispatch = useAppDispatch();
+  const canManageRoles = user?.permissions?.includes("roles:manage") ?? false;
 
   return (
     <div className="flex min-h-screen bg-slate-50">
@@ -35,6 +36,19 @@ export function AppLayout() {
               {item.label}
             </NavLink>
           ))}
+          {canManageRoles && (
+            <NavLink
+              to="/roles"
+              className={({ isActive }) =>
+                cn(
+                  "rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100",
+                  isActive && "bg-brand-50 text-brand-700"
+                )
+              }
+            >
+              Roles
+            </NavLink>
+          )}
         </nav>
         <div className="border-t border-slate-100 p-4">
           <p className="text-sm font-medium text-slate-900">{user?.name}</p>

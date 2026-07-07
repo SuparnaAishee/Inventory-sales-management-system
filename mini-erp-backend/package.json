@@ -7,7 +7,9 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
-    "seed:admin": "ts-node src/scripts/seedAdmin.ts"
+    "seed:admin": "ts-node src/scripts/seedAdmin.ts",
+    "seed:roles": "ts-node src/scripts/seedRoles.ts",
+    "seed:data": "ts-node src/scripts/seedData.ts"
   },
   "keywords": [
     "mern",
