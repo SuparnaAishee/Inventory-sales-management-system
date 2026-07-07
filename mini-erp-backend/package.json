@@ -9,6 +9,7 @@
     "start": "node dist/server.js",
     "seed:admin": "ts-node src/scripts/seedAdmin.ts",
     "seed:roles": "ts-node src/scripts/seedRoles.ts",
+    "seed:demo-users": "ts-node src/scripts/seedDemoUsers.ts",
     "seed:data": "ts-node src/scripts/seedData.ts"
   },
   "keywords": [
