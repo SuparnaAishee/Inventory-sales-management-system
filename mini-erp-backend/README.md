@@ -104,6 +104,9 @@ Health check: `GET /health` → `{ success: true, message: "OK" }`
 
 ## API Documentation
 
+**Interactive Swagger UI:** `GET /api-docs` (raw OpenAPI 3.0 spec at `GET /api-docs.json`, importable into Postman/Insomnia).
+Live: https://inventory-sales-management-system.onrender.com/api-docs
+
 Base URL: `/api/v1`
 
 All responses use a consistent envelope:

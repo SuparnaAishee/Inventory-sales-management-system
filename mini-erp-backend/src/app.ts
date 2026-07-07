@@ -1,12 +1,14 @@
 import cors from "cors";
 import path from "path";
 import express, { Application } from "express";
+import swaggerUi from "swagger-ui-express";
 import authRoutes from "./modules/auth/auth.routes";
 import productRoutes from "./modules/product/product.routes";
 import saleRoutes from "./modules/sale/sale.routes";
 import dashboardRoutes from "./modules/dashboard/dashboard.routes";
 import roleRoutes from "./modules/rbac/role.routes";
 import { globalErrorHandler, notFoundHandler } from "./middleware/errorHandler";
+import { swaggerSpec } from "./config/swagger";
 
 export function createApp(): Application {
   const app = express();
@@ -24,6 +26,11 @@ export function createApp(): Application {
   app.get("/health", (_req, res) => {
     res.status(200).json({ success: true, message: "OK" });
   });
+
+  app.get("/api-docs.json", (_req, res) => {
+    res.json(swaggerSpec);
+  });
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, { customSiteTitle: "Mini ERP API Docs" }));
 
   const API_PREFIX = "/api/v1";
   app.use(`${API_PREFIX}/auth`, authRoutes);
